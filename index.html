@@ -1,1 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CloudHire | Cloud Job Portal</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+    <header>
+
+        <nav>
+
+            <div class="logo">
+                ☁ CloudHire
+            </div>
+
+            <div class="nav-links">
+
+                <a href="#home">Home</a>
+
+                <a href="#jobs">Jobs</a>
+
+                <a href="#about">About</a>
+
+                <button onclick="openPostJob()">
+                    Post a Job
+                </button>
+
+            </div>
+
+        </nav>
+
+    </header>
+
+
+    <!-- HERO SECTION -->
+
+    <section class="hero" id="home">
+
+        <div class="hero-content">
+
+            <p class="badge">
+                ☁ CLOUD-BASED JOB PORTAL
+            </p>
+
+            <h1>
+                Find Your
+                <span>Dream Job</span>
+                in the Cloud
+            </h1>
+
+            <p class="hero-text">
+                Discover opportunities from companies around
+                the world and take the next step in your career.
+            </p>
+
+
+            <!-- SEARCH -->
+
+            <div class="search-box">
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search jobs, skills or companies..."
+                    onkeyup="searchJobs()"
+                >
+
+                <select
+                    id="locationFilter"
+                    onchange="filterJobs()"
+                >
+
+                    <option value="">
+                        All Locations
+                    </option>
+
+                    <option value="Chennai">
+                        Chennai
+                    </option>
+
+                    <option value="Bangalore">
+                        Bangalore
+                    </option>
+
+                    <option value="Hyderabad">
+                        Hyderabad
+                    </option>
+
+                    <option value="Remote">
+                        Remote
+                    </option>
+
+                </select>
+
+                <button onclick="searchJobs()">
+                    Search Jobs
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- STATISTICS -->
+
+    <section class="stats">
+
+        <div>
+
+            <h2>10K+</h2>
+
+            <p>
+                Jobs Available
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <h2>5K+</h2>
+
+            <p>
+                Companies
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <h2>25K+</h2>
+
+            <p>
+                Job Seekers
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <h2>50+</h2>
+
+            <p>
+                Countries
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- JOB SECTION -->
+
+    <section class="jobs-section" id="jobs">
+
+        <div class="section-title">
+
+            <div>
+
+                <p class="small-title">
+                    EXPLORE OPPORTUNITIES
+                </p>
+
+                <h2>
+                    Latest Job Openings
+                </h2>
+
+            </div>
+
+
+            <select
+                id="typeFilter"
+                onchange="filterJobs()"
+            >
+
+                <option value="">
+                    All Job Types
+                </option>
+
+                <option value="Full Time">
+                    Full Time
+                </option>
+
+                <option value="Internship">
+                    Internship
+                </option>
+
+                <option value="Part Time">
+                    Part Time
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- JOB CARDS WILL APPEAR HERE -->
+
+        <div
+            id="jobContainer"
+            class="job-container"
+        >
+
+        </div>
+
+    </section>
+
+
+    <!-- ABOUT SECTION -->
+
+    <section
+        class="about"
+        id="about"
+    >
+
+        <div>
+
+            <p class="small-title">
+                WHY CLOUDHIRE?
+            </p>
+
+            <h2>
+                Your Career.
+                <br>
+                Your Future.
+            </h2>
+
+        </div>
+
+
+        <div class="about-text">
+
+            <p>
+                CloudHire is a cloud-based job portal designed
+                to connect talented candidates with organizations
+                worldwide.
+            </p>
+
+            <p>
+                Our platform provides a simple and modern way
+                to discover jobs, explore companies and apply
+                for opportunities.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- APPLY JOB MODAL -->
+
+    <div
+        id="applyModal"
+        class="modal"
+    >
+
+        <div class="modal-content">
+
+            <span
+                class="close"
+                onclick="closeModal()"
+            >
+                ×
+            </span>
+
+            <h2>
+                Apply for Job
+            </h2>
+
+            <p id="selectedJob">
+            </p>
+
+
+            <input
+                id="candidateName"
+                type="text"
+                placeholder="Full Name"
+            >
+
+
+            <input
+                id="candidateEmail"
+                type="email"
+                placeholder="Email Address"
+            >
+
+
+            <input
+                id="candidatePhone"
+                type="tel"
+                placeholder="Phone Number"
+            >
+
+
+            <input
+                id="resume"
+                type="text"
+                placeholder="Resume Link"
+            >
+
+
+            <button onclick="submitApplication()">
+                Submit Application
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- POST JOB MODAL -->
+
+    <div
+        id="postModal"
+        class="modal"
+    >
+
+        <div class="modal-content">
+
+            <span
+                class="close"
+                onclick="closePostJob()"
+            >
+                ×
+            </span>
+
+            <h2>
+                Post a Job
+            </h2>
+
+
+            <input
+                id="jobTitle"
+                type="text"
+                placeholder="Job Title"
+            >
+
+
+            <input
+                id="companyName"
+                type="text"
+                placeholder="Company Name"
+            >
+
+
+            <input
+                id="jobLocation"
+                type="text"
+                placeholder="Location"
+            >
+
+
+            <select id="jobType">
+
+                <option value="Full Time">
+                    Full Time
+                </option>
+
+                <option value="Internship">
+                    Internship
+                </option>
+
+                <option value="Part Time">
+                    Part Time
+                </option>
+
+            </select>
+
+
+            <input
+                id="jobSalary"
+                type="text"
+                placeholder="Salary"
+            >
+
+
+            <input
+                id="jobSkills"
+                type="text"
+                placeholder="Skills (Java, Python, SQL)"
+            >
+
+
+            <button onclick="postJob()">
+                Publish Job
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <h2>
+            ☁ CloudHire
+        </h2>
+
+        <p>
+            Cloud-Based Job Portal
+        </p>
+
+        <p>
+            © 2026 CloudHire | Cloud Computing Mini Project
+        </p>
+
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
